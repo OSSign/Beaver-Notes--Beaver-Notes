@@ -1,6 +1,6 @@
 const packageJSON = require('./package.json');
 
-const { azuresigntoolSync } = require('./azuresigntool.js');
+const { azuresigntoolSync } = require('@ossign/azuresigntool');
 
 /**
  * @type {import('electron-builder').Configuration}
