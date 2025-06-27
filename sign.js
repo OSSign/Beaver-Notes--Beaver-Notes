@@ -8,7 +8,7 @@ exports.default = async function(configuration) {
   const AST_VAULT = process.env.AST_VAULT;
 
   require("child_process").execSync(
-    `/c/a/AzureSignTool.exe sign -kvu "${AST_VAULT}" -kvc "${AST_CERT}" -kvi "${AST_IDENT}" -kvs "${AST_SECRET}" --azure-key-vault-tenant-id "${AST_TENANT}" -tr "${AST_TIMESTAMP}" -td ${AST_TD} "${configuration.path}"`,
+    `AzureSignTool.exe sign -kvu "${AST_VAULT}" -kvc "${AST_CERT}" -kvi "${AST_IDENT}" -kvs "${AST_SECRET}" --azure-key-vault-tenant-id "${AST_TENANT}" -tr "${AST_TIMESTAMP}" -td ${AST_TD} "${configuration.path}"`,
     {
       stdio: "inherit"
     }

@@ -61,7 +61,7 @@ jobs:
       - name: Build and conditionally publish Electron app
         shell: bash
         run: |
-          curl -L https://github.com/vcsjones/AzureSignTool/releases/download/v6.0.1/AzureSignTool-x64.exe -o /c/a/AzureSignTool.exe
+          curl -L https://github.com/vcsjones/AzureSignTool/releases/download/v6.0.1/AzureSignTool-x64.exe -o AzureSignTool.exe
           PUBLISH_FLAG=""
           if [[ "${{ steps.publishflag.outputs.publish }}" == "true" ]]; then
             PUBLISH_FLAG="--publish always"
