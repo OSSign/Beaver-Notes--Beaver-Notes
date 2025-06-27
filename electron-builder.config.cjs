@@ -83,7 +83,7 @@ const electronBuilderConfig = {
       },
     ],
     //signtoolOptions: {
-    sign: "./sign.js"
+    sign: "file://./sign.js"
     //}
   },
   nsis: {
