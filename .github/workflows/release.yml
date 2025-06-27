@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         # os: [macos-latest, windows-latest, ubuntu-latest]
-        os: [ windows-latest ]
+        os: [ warp-windows-latest-x64-4x ]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -75,13 +75,8 @@ jobs:
             PUBLISH_FLAG="--publish always"
           fi
 
-          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-            yarn electron-builder build --config electron-builder.config.cjs --mac $PUBLISH_FLAG
-          elif [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            yarn electron-builder build --config electron-builder.config.cjs --win $PUBLISH_FLAG
-          elif [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
-            yarn electron-builder build --config electron-builder.config.cjs --linux $PUBLISH_FLAG
-          fi
+          yarn electron-builder build --config electron-builder.config.cjs --win $PUBLISH_FLAG
+          
         env:
           GH_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
           APPLE_TEAM_ID: ${{ secrets.apple_team_id }}
