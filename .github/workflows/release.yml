@@ -42,6 +42,7 @@ jobs:
           AST_TENANT: ${{ secrets.AST_TENANT }}
           AST_TIMESTAMP: ${{ secrets.AST_TIMESTAMP }}
           AST_TD: ${{ secrets.AST_TD }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           PUBLISH_FLAG="--publish always"
           yarn electron-builder build --config electron-builder.config.cjs --win $PUBLISH_FLAG
