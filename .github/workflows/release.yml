@@ -1,7 +1,9 @@
 name: Build and Package
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -37,6 +39,12 @@ jobs:
           security import $CERTIFICATE_PATH -P "${{ secrets.APPLE_SIGNING_CERTIFICATE_PASSWORD }}" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
           security list-keychains -s $KEYCHAIN_PATH
           security set-key-partition-list -S apple-tool:,apple: -s -k "${{ secrets.KEYCHAIN_PASSWORD }}" $KEYCHAIN_PATH
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('yarn.lock') }}
+
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile

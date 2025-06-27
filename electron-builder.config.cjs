@@ -77,11 +77,17 @@ const electronBuilderConfig = {
     icon: 'buildResources/icon.ico',
     target: [
       { target: 'portable', arch: ['x64', 'arm64'] },
-      { target: 'nsis', arch: ['x64', 'arm64'] },
+      { 
+        target: 'nsis', 
+        arch: ['x64', 'arm64'],
+        signtoolOptions: {
+          sign: "./sign.js"
+        }
+      },
     ],
-    "signtoolOptions": {
-      "sign": "./sign.js"
-    }
+    //signtoolOptions: {
+    sign: "./sign.js"
+    //}
   },
   nsis: {
     oneClick: true,
