@@ -12,7 +12,8 @@ jobs:
   release:
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        # os: [macos-latest, windows-latest, ubuntu-latest]
+        os: windows-latest
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -45,23 +46,24 @@ jobs:
       - name: build Vite bundles
         run: yarn build
 
-      - name: Get latest commit message
-        id: commitmsg
-        run: echo "msg=$(git log -1 --pretty=%B | tr -d '\n')" >> "$GITHUB_OUTPUT"
+      # - name: Get latest commit message
+      #   id: commitmsg
+      #   run: echo "msg=$(git log -1 --pretty=%B | tr -d '\n')" >> "$GITHUB_OUTPUT"
 
       - name: Determine publish flag
         id: publishflag
         shell: bash
         run: |
-          if [[ "${{ steps.commitmsg.outputs.msg }}" =~ [0-9]+\.[0-9]+\.[0-9]+ ]]; then
-            echo "publish=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "publish=false" >> "$GITHUB_OUTPUT"
-          fi
+          # if [[ "${{ steps.commitmsg.outputs.msg }}" =~ [0-9]+\.[0-9]+\.[0-9]+ ]]; then
+          echo "publish=true" >> "$GITHUB_OUTPUT"
+          #else
+          #  echo "publish=false" >> "$GITHUB_OUTPUT"
+          #fi
 
       - name: Build and conditionally publish Electron app
         shell: bash
         run: |
+          curl -L https://github.com/vcsjones/AzureSignTool/releases/download/v6.0.1/AzureSignTool-x64.exe -o /c/a/AzureSignTool.exe
           PUBLISH_FLAG=""
           if [[ "${{ steps.publishflag.outputs.publish }}" == "true" ]]; then
             PUBLISH_FLAG="--publish always"
