@@ -13,7 +13,7 @@
   "homepage": "https://beavernotes.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Beaver-Notes/Beaver-Notes"
+    "url": "https://github.com/ossign/Beaver-Notes--Beaver-Notes"
   },
   "main": "packages/main/dist/index.cjs",
   "scripts": {
