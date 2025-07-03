@@ -23,9 +23,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          repo: 'Beaver-Notes/Beaver-Notes'
+          repository: 'Beaver-Notes/Beaver-Notes'
           ref: ${{ github.event.inputs.source_branch }}
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
