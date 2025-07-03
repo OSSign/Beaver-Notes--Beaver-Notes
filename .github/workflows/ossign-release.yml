@@ -1,18 +1,24 @@
 name: Build and Package
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
     inputs:
       source_branch:
         description: 'The source branch or ref to build from'
         default: 'main'
         required: true
-
+      release_name:
+        description: 'The name for the release'
+        required: true
+            
 jobs:
   release:
     environment: OSSign
     runs-on: win2k25-xl
-    permissions: write-all
+    
+    permissions:
+      contents: write
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -46,8 +52,13 @@ jobs:
         run: |
           yarn electron-builder build --config electron-builder.config.cjs --win
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+      - name: Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: Beaver-Notes-Windows
-          path: dist/*
+          files: dist/*
+          name: ${{ github.event.inputs.release_name }}
+          body: |
+            # Signed Release ${{ github.event.inputs.release_name }}
+            These are the distributable files for the signed release of Beaver-Notes ${{ github.event.inputs.release_name }}
+            
+          
