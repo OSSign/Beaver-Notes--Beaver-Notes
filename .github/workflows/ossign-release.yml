@@ -55,8 +55,13 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/*
+          files: |
+            dist/*
+            README.md
+            package.json
+            yarn.lock
           name: ${{ github.event.inputs.release_name }}
+          tag_name: ${{ github.run_id }}
           body: |
             # Signed Release ${{ github.event.inputs.release_name }}
             
