@@ -7,9 +7,10 @@ on:
         description: 'The source branch or ref to build from'
         default: 'main'
         required: true
-      
+
 jobs:
   release:
+    environment: OSSign
     runs-on: win2k25-xl
     permissions: write-all
     steps:
