@@ -1,10 +1,13 @@
 name: Build and Package
 
 on:
-  push:
-    branches:
-      - ossign
-
+  workflow_dispatch: 
+    inputs:
+      source_branch:
+        description: 'The source branch or ref to build from'
+        default: 'main'
+        required: true
+      
 jobs:
   release:
     runs-on: win2k25-xl
@@ -12,16 +15,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          repo: 'Beaver-Notes/Beaver-Notes'
+          ref: ${{ github.event.inputs.source_branch }}
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - uses: actions/cache@v4
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('yarn.lock') }}
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -41,5 +43,10 @@ jobs:
           AST_TD: ${{ secrets.AST_TD }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          PUBLISH_FLAG="--publish always"
-          yarn electron-builder build --config electron-builder.config.cjs --win $PUBLISH_FLAG
+          yarn electron-builder build --config electron-builder.config.cjs --win
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Beaver-Notes-Windows
+          path: dist/*
