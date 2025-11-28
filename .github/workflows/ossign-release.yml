@@ -50,7 +50,7 @@ jobs:
           AST_TD: ${{ secrets.AST_TD }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          yarn electron-builder build --config electron-builder.config.cjs --win
+          yarn electron-builder build --config electron-builder.config.cjs --win true
 
       - name: Release
         uses: softprops/action-gh-release@v2
