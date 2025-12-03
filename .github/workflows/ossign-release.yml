@@ -50,6 +50,7 @@ jobs:
           AST_TD: ${{ secrets.AST_TD }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          curl -L https://github.com/vcsjones/AzureSignTool/releases/download/v6.0.1/AzureSignTool-x64.exe -o AzureSignTool.exe
           yarn electron-builder build --config electron-builder.config.cjs --publish never
 
       - name: Release
