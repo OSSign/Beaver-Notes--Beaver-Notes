@@ -1,3 +1,19 @@
+![OSSign Banner](https://github.com/OSSign/.github/raw/main/svg/badge-white-wide-links.svg)
+# OSSign Information
+## What's this?
+This is a fork of the original repository, with the purpose of building binaries for regular code signing. 
+
+## How are updates pushed?
+Via a Github actions workflow that runs in the source repository [Beaver-Notes/beaver-notes]
+
+## Where are the signed binaries published?
+The binaries are published under releases here, and in the source repository [Beaver-Notes/beaver-notes] as well.
+
+<hl/>
+<br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
 <h1 align="center">Beaver Notes</h1>
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
