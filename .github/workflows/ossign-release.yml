@@ -82,7 +82,7 @@ jobs:
           CI: 'true'
           OSSIGN_CONFIG_BASE64: ${{ secrets.OSSIGN_CONFIG_BASE64 }}
         run: |
-          yarn tauri build --target "x86_64-pc-windows-msvc" --bundles nsis --ci || true
+          yarn tauri build --verbose --target "x86_64-pc-windows-msvc" --bundles nsis --ci || true
       
       - name: Stage Windows assets
         shell: pwsh
