@@ -142,10 +142,8 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/*
+            dist-artifacts/*
             README.md
-            package.json
-            yarn.lock
           name: ${{ github.event.inputs.release_name }}
           tag_name: ${{ github.run_id }}
           body: |
