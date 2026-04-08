@@ -17,7 +17,7 @@ env:
 jobs:
   release:
     runs-on: windows-latest
-    # environment: OSSign
+    environment: OSSign
 
     permissions:
       contents: write
@@ -98,9 +98,9 @@ jobs:
         shell: bash
         env:
           CI: 'true'
-          OSSIGN_CONFIG_BASE64: ${{ secrets.OSSIGN_CONFIG_BASE64 }}
+          OSSIGN_CONFIG: ${{ secrets.OSSIGN_CONFIG }}
         run: |
-          yarn tauri build --verbose --target "${{ matrix.tauri_target }}" --bundles nsis --ci || true
+          yarn tauri build --verbose --target "${{ matrix.tauri_target }}" --bundles nsis --ci
       
       - name: Stage Windows assets
         shell: pwsh
