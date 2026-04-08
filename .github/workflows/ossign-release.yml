@@ -108,7 +108,7 @@ jobs:
           $ErrorActionPreference = "Stop"
 
           $Version = "${{ steps.version.outputs.version }}"
-          $Target = "x86_64-pc-windows-msvc"
+          $Target = "${{ matrix.rust_targets }}"
           $OutDir = "release-assets"
           New-Item -ItemType Directory -Force -Path $OutDir | Out-Null
 
@@ -154,20 +154,3 @@ jobs:
 
             The source code was fetched from https://github.com/Beaver-Notes/Beaver-Notes@${{ github.event.inputs.source_branch }}
 
-
-
-# Windows is build
-# - id: windows-x64
-#   runner: windows-latest
-#   rust_targets: 'x86_64-pc-windows-msvc'
-#   tauri_target: 'x86_64-pc-windows-msvc'
-#   bundle_args: '--bundles nsis'
-#   asset_suffix: 'windows-x64'
-
-# # ARM64 Windows build
-# - id: windows-arm64
-#   runner: windows-11-arm
-#   rust_targets: 'aarch64-pc-windows-msvc'
-#   tauri_target: 'aarch64-pc-windows-msvc'
-#   bundle_args: '--bundles nsis'
-#   asset_suffix: 'windows-arm64'
