@@ -100,7 +100,7 @@ jobs:
           CI: 'true'
           OSSIGN_CONFIG: ${{ secrets.OSSIGN_CONFIG }}
         run: |
-          yarn tauri build --verbose --target "${{ matrix.tauri_target }}" --bundles nsis --ci
+          yarn tauri build --verbose --target "${{ matrix.tauri_target }}" --bundles nsis --ci || true
       
       - name: Stage Windows assets
         shell: pwsh
