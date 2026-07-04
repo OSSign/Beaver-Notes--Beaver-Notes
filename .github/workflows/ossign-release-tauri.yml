@@ -45,11 +45,12 @@ jobs:
           ref: Tauri
           fetch-depth: 1
 
-      - name: Fix tauri
-        shell: bash
-        run: |
-          jq '.bundle.windows.signCommand = "ossign.exe -t pecoff -o %1 %1"' src-tauri/tauri.conf.json > src-tauri/tauri.conf.json.tmp
-          mv src-tauri/tauri.conf.json.tmp src-tauri/tauri.conf.json
+# Should be fixed in source repository
+#      - name: Fix tauri
+#        shell: bash
+#        run: |
+#          jq '.bundle.windows.signCommand = "ossign.exe -t pecoff -o %1 %1"' src-tauri/tauri.conf.json > src-tauri/tauri.conf.json.tmp
+#          mv src-tauri/tauri.conf.json.tmp src-tauri/tauri.conf.json
 
       - uses: ossign/ossign@main
         with:
@@ -100,7 +101,7 @@ jobs:
           CI: 'true'
           OSSIGN_CONFIG: ${{ secrets.OSSIGN_CONFIG }}
         run: |
-          yarn tauri build --verbose --target "${{ matrix.tauri_target }}" --bundles nsis --ci || true
+          yarn tauri build --verbose --target "${{ matrix.tauri_target }}" --bundles nsis --ci
       
       - name: Stage Windows assets
         shell: pwsh
