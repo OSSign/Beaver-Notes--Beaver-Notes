@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: 'Beaver-Notes/Beaver-Notes'
-          ref: Tauri
+          ref: ${{ github.event.inputs.source_branch }}
           fetch-depth: 1
 
 # Should be fixed in source repository
