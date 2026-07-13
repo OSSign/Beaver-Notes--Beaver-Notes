@@ -95,19 +95,20 @@ jobs:
         run: |
           yarn install --frozen-lockfile
 
-      - name: Fix updater signing key (temporary)
-        shell: bash
-        run: |
-          jq '.plugins.updater.pubkey = "${{ secrets.TAURI_SIGNING_PUBLIC_KEY }}"' src-tauri/tauri.conf.json > src-tauri/tauri.conf.json.tmp
-          mv src-tauri/tauri.conf.json.tmp src-tauri/tauri.conf.json
+      # Fixed
+      #- name: Fix updater signing key (temporary)
+      #  shell: bash
+      #  run: |
+      #    jq '.plugins.updater.pubkey = "${{ secrets.TAURI_SIGNING_PUBLIC_KEY }}"' src-tauri/tauri.conf.json > src-tauri/tauri.conf.json.tmp
+      #    mv src-tauri/tauri.conf.json.tmp src-tauri/tauri.conf.json
 
       - name: Build Windows bundles
         shell: bash
         env:
           CI: 'true'
           OSSIGN_CONFIG: ${{ secrets.OSSIGN_CONFIG }}
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+          TAURI_SIGNING_PRIVATE_KEY: "${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}"
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: "${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}"
         run: |
           yarn tauri build --verbose --target "${{ matrix.tauri_target }}" --bundles nsis --ci
       
